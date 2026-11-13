@@ -37,7 +37,6 @@ class FrigateKerherveEntity(CoordinatorEntity[FrigateKerherveCoordinator]):
                 identifiers={(DOMAIN, f"{entry_id}_{camera}")},
                 name=f"Frigate santé {camera}",
                 manufacturer="Frigate",
-                via_device=(DOMAIN, entry_id),
             )
         else:
             self._attr_device_info = DeviceInfo(
