@@ -1,0 +1,39 @@
+set_config:
+  fields:
+    config_data:
+      required: true
+      example: '{"cameras": {"cameras_de_la_cour": {"snapshots": {"required_zones": ["zone_cour"]}}}}'
+      selector:
+        object:
+    requires_restart:
+      default: true
+      selector:
+        boolean:
+get_config:
+  fields:
+    path:
+      example: cameras.cameras_de_la_cour.zones
+      selector:
+        text:
+restart:
+list_faces:
+delete_faces:
+  fields:
+    name:
+      required: true
+      selector:
+        text:
+    ids:
+      required: true
+      selector:
+        object:
+classify_face:
+  fields:
+    name:
+      required: true
+      selector:
+        text:
+    training_file:
+      required: true
+      selector:
+        text:

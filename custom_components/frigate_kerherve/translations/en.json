@@ -1,0 +1,129 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Frigate Kerherve",
+        "description": "Adresse interne de Frigate (sans authentification, port 5000).",
+        "data": {
+          "url": "Adresse de Frigate"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Frigate ne répond pas à cette adresse."
+    },
+    "abort": {
+      "single_instance_allowed": "Déjà configuré."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "connection_quality": {
+        "name": "Qualité de connexion"
+      },
+      "reconnects_last_hour": {
+        "name": "Reconnexions (1 h)"
+      },
+      "stalls_last_hour": {
+        "name": "Blocages (1 h)"
+      },
+      "ffmpeg_cpu": {
+        "name": "Charge ffmpeg"
+      },
+      "camera_fps": {
+        "name": "Images par seconde"
+      },
+      "system_cpu": {
+        "name": "Charge système"
+      },
+      "system_memory": {
+        "name": "Mémoire système"
+      },
+      "storage_used": {
+        "name": "Disque enregistrements"
+      },
+      "inference_speed": {
+        "name": "Vitesse de détection"
+      },
+      "face_recognition_speed": {
+        "name": "Vitesse visages"
+      },
+      "plate_recognition_speed": {
+        "name": "Vitesse plaques"
+      },
+      "object_description_speed": {
+        "name": "Vitesse descriptions IA"
+      },
+      "uptime": {
+        "name": "Durée de marche"
+      }
+    },
+    "binary_sensor": {
+      "camera_problem": {
+        "name": "Problème"
+      }
+    }
+  },
+  "services": {
+    "set_config": {
+      "name": "Modifier la config",
+      "description": "Modifie la configuration de Frigate (PUT /api/config/set). Un redémarrage de Frigate est nécessaire pour l'appliquer.",
+      "fields": {
+        "config_data": {
+          "name": "Données",
+          "description": "Arbre de configuration à fusionner."
+        },
+        "requires_restart": {
+          "name": "Redémarrage requis",
+          "description": "Indique à Frigate que le changement demande un redémarrage."
+        }
+      }
+    },
+    "get_config": {
+      "name": "Lire la config",
+      "description": "Renvoie la configuration de Frigate, ou une branche.",
+      "fields": {
+        "path": {
+          "name": "Chemin",
+          "description": "Chemin à points, vide pour tout."
+        }
+      }
+    },
+    "restart": {
+      "name": "Redémarrer Frigate",
+      "description": "Redémarre Frigate (1 à 2 minutes sans caméras)."
+    },
+    "list_faces": {
+      "name": "Lister les visages",
+      "description": "Renvoie la bibliothèque de visages."
+    },
+    "delete_faces": {
+      "name": "Supprimer des photos de visage",
+      "description": "Supprime des photos d'une personne. Irréversible.",
+      "fields": {
+        "name": {
+          "name": "Personne",
+          "description": "Nom du dossier."
+        },
+        "ids": {
+          "name": "Photos",
+          "description": "Liste des noms de fichiers."
+        }
+      }
+    },
+    "classify_face": {
+      "name": "Classer un visage",
+      "description": "Range une photo en attente dans le dossier d'une personne.",
+      "fields": {
+        "name": {
+          "name": "Personne",
+          "description": "Nom du dossier."
+        },
+        "training_file": {
+          "name": "Photo",
+          "description": "Nom du fichier en attente."
+        }
+      }
+    }
+  }
+}
