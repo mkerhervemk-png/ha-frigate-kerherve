@@ -11,6 +11,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import FrigateApi, FrigateApiError
 from .const import CONF_URL, DEFAULT_URL, DOMAIN
+from .url import UrlInvalideError, valider_url
 
 
 class FrigateKerherveConfigFlow(ConfigFlow, domain=DOMAIN):
@@ -23,13 +24,17 @@ class FrigateKerherveConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> ConfigFlowResult:
         errors: dict[str, str] = {}
         if user_input is not None:
-            url = user_input[CONF_URL].strip().rstrip("/")
             try:
-                await FrigateApi(async_get_clientsession(self.hass), url).version()
-            except FrigateApiError:
-                errors["base"] = "cannot_connect"
+                url = valider_url(user_input[CONF_URL])
+            except UrlInvalideError:
+                errors["base"] = "invalid_url"
             else:
-                return self.async_create_entry(title="Frigate Kerherve", data={CONF_URL: url})
+                try:
+                    await FrigateApi(async_get_clientsession(self.hass), url).version()
+                except FrigateApiError:
+                    errors["base"] = "cannot_connect"
+                else:
+                    return self.async_create_entry(title="Frigate Kerherve", data={CONF_URL: url})
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema(

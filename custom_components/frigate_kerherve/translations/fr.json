@@ -10,7 +10,8 @@
       }
     },
     "error": {
-      "cannot_connect": "Frigate ne répond pas à cette adresse."
+      "cannot_connect": "Frigate ne répond pas à cette adresse.",
+      "invalid_url": "Adresse refusée : http/https uniquement, pas d'identifiants, et hôte local ou privé."
     },
     "abort": {
       "single_instance_allowed": "Déjà configuré."

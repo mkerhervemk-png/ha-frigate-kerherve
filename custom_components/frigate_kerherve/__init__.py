@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Any
+from urllib.parse import quote
 
 import voluptuous as vol
 
@@ -67,7 +68,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     async def delete_faces(call: ServiceCall) -> ServiceResponse:
         return _wrap(
             await _call(
-                hass, "POST", f"faces/{call.data['name']}/delete", {"ids": call.data["ids"]}
+                hass, "POST", f"faces/{quote(call.data['name'], safe='')}/delete", {"ids": call.data["ids"]}
             )
         )
 
@@ -76,7 +77,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             await _call(
                 hass,
                 "POST",
-                f"faces/train/{call.data['name']}/classify",
+                f"faces/train/{quote(call.data['name'], safe='')}/classify",
                 {"training_file": call.data["training_file"]},
             )
         )

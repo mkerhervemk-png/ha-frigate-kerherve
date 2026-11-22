@@ -7,6 +7,8 @@ from typing import Any
 
 import aiohttp
 
+from .url import valider_url
+
 
 class FrigateApiError(Exception):
     """Erreur de communication avec Frigate."""
@@ -17,7 +19,7 @@ class FrigateApi:
 
     def __init__(self, session: aiohttp.ClientSession, url: str) -> None:
         self._session = session
-        self._url = url.rstrip("/")
+        self._url = valider_url(url)
 
     async def request(
         self, method: str, path: str, json: Any | None = None, timeout: int = 20
