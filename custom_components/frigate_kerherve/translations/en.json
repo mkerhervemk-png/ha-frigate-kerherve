@@ -10,7 +10,8 @@
       }
     },
     "error": {
-      "cannot_connect": "Frigate ne répond pas à cette adresse."
+      "cannot_connect": "Frigate ne répond pas à cette adresse.",
+      "invalid_url": "Address refused: http/https only, no credentials, and a local or private host."
     },
     "abort": {
       "single_instance_allowed": "Déjà configuré."
